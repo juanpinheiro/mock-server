@@ -1,0 +1,48 @@
+{
+  "name": "nutror_v3_mock",
+  "version": "1.0.0",
+  "description": "Simple mock service",
+  "author": "Juan Pinheiro",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://juanleme@bitbucket.org/juanleme/nutror_v3_mock.git"
+  },
+  "standard": {
+    "env": [
+      "mocha"
+    ],
+    "ignore": [
+      "mock"
+    ]
+  },
+  "scripts": {
+    "test": "mocha -R spec app/**/*.spec.js",
+    "start": "node app/index.js",
+    "lint": "standard --verbose | snazzy",
+    "node-debug": "DEBUG=express* node app/index.js",
+    "chrome-debug": "node --debug-brk --inspect app/index.js",
+    "coverage": "istanbul cover _mocha $(find ./app -name \"*.spec.js\" -not -path \"./node_modules/*\") ",
+    "metric": "nodejs-dashboard -- node -r nodejs-dashboard app/index.js"
+  },
+  "devDependencies": {
+    "eslint": "^3.13.1",
+    "lodash": "^4.17.4",
+    "mocha": "^3.2.0",
+    "nodejs-dashboard": "^0.3.0",
+    "should": "^11.1.2",
+    "snazzy": "^6.0.0",
+    "standard": "^8.6.0",
+    "supertest": "^2.0.1"
+  },
+  "dependencies": {
+    "express": "^4.14.0",
+    "helmet": "^3.4.0",
+    "http-status": "^0.2.5",
+    "mongodb": "^2.1.18",
+    "morgan": "^1.7.0",
+    "spdy": "https://registry.npmjs.org/spdy/-/spdy-3.4.4.tgz"
+  },
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/juanleme/nutror_v3_mock#readme"
+}
