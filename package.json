@@ -30,6 +30,7 @@
     "lodash": "^4.17.4",
     "mocha": "^3.2.0",
     "nodejs-dashboard": "^0.3.0",
+    "q": "^1.5.1",
     "should": "^11.1.2",
     "snazzy": "^6.0.0",
     "standard": "^8.6.0",
