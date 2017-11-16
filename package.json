@@ -30,8 +30,6 @@
     "gulp": "^3.9.1",
     "gulp-clean": "^0.3.2",
     "gulp-concat-json": "^1.0.0",
-    "gulp-concat-util": "^0.5.5",
-    "gulp-json-concat": "^0.1.1",
     "gulp-livereload": "^3.8.1",
     "gulp-nodemon": "^2.2.1",
     "lodash": "^4.17.4",
