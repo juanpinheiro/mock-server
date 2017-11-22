@@ -1,0 +1,19 @@
+{
+  "method": "GET",
+  "route": "/profile",
+  "use": 200,
+  "timeout": 200,
+  "200": {
+    "data": {
+      "id": 1,
+      "name": "Bruce Wayne",
+      "profile-img" : "img/batman.jpg",
+      "background-img": "img/back.jpg"  
+    }
+  },
+  "500": {
+    "data": {
+      "message": "500 - Internal Server Error!"
+    }
+  }
+}

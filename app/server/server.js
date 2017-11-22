@@ -13,6 +13,11 @@ const start = (options) => {
 
     app.use(morgan('dev'))
     app.use(helmet())
+    app.use((req, res, next) => {
+      res.header('Access-Control-Allow-Origin', '*')
+      res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization')
+      next()
+    })
     app.use((err, req, res, next) => {
       reject(new Error('Something went wrong!, err:' + err))
       res.status(500).send('Something went wrong!')
