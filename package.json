@@ -18,7 +18,7 @@
   },
   "scripts": {
     "test": "mocha -R spec app/**/*.spec.js",
-    "start": "node app/index.js",
+    "start": "gulp serve",
     "lint": "standard --verbose | snazzy",
     "node-debug": "DEBUG=express* node app/index.js",
     "chrome-debug": "node --debug-brk --inspect app/index.js",
