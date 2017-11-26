@@ -1,17 +1,24 @@
 const express = require('express')
 const morgan = require('morgan')
 const helmet = require('helmet')
-const api = require('../api/mock')
+const bodyparser = require('body-parser')
+const apiMock = require('../api/mock')
 
-const start = (options) => {
+const start = (container) => {
   return new Promise((resolve, reject) => {
-    if (!options.port) {
+    const {port} = container.resolve('serverSettings')
+    const repo = container.resolve('repo')
+
+    if (!repo) {
+      reject(new Error('The server must be started with a connected repository'))
+    }
+    if (!port) {
       reject(new Error('The server must be started with an available port'))
     }
 
     const app = express()
-
     app.use(morgan('dev'))
+    app.use(bodyparser.json())
     app.use(helmet())
     app.use((req, res, next) => {
       res.header('Access-Control-Allow-Origin', '*')
@@ -21,13 +28,17 @@ const start = (options) => {
     app.use((err, req, res, next) => {
       reject(new Error('Something went wrong!, err:' + err))
       res.status(500).send('Something went wrong!')
+      next()
+    })
+    app.use((req, res, next) => {
+      req.container = container.createScope()
+      next()
     })
 
-    api(app, options)
+    const mock = apiMock.bind(null, {repo})
+    mock(app)
 
-    const server = app.listen(options.port, () => resolve(server))
-
-    console.log(`Server started succesfully, running on port: ${options.port}.`)
+    const server = app.listen(port, () => resolve(server))
   })
 }
 

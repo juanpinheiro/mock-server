@@ -1,12 +1,12 @@
 'use strict'
-
 const {EventEmitter} = require('events')
 const server = require('./server/server')
-const config = require('./config/')
+const repository = require('./repository/repository')
+const di = require('./config')
 const mediator = new EventEmitter()
 
 console.log('--- MOCK SERVER ---')
-console.log('Connecting to mock server...')
+console.log('Connecting...')
 
 process.on('uncaughtException', (err) => {
   console.error('Unhandled Exception', err)
@@ -16,8 +16,21 @@ process.on('uncaughtRejection', (err, promise) => {
   console.error('Unhandled Rejection', err)
 })
 
-server.start({
-  port: config.serverSettings.port
+mediator.on('di.ready', (container) => {
+  repository.connect(container)
+    .then(repo => {
+      console.log('Connected. Starting Server')
+      container.registerValue({repo})
+      return server.start(container)
+    })
+    .then(app => {
+      console.log(`Server started succesfully, running on port: ${container.cradle.serverSettings.port}.`)
+      app.on('close', () => {
+        container.resolve('repo').disconnect()
+      })
+    })
 })
 
-mediator.emit('boot.ready')
+di.init(mediator)
+
+mediator.emit('init')
