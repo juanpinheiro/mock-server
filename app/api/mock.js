@@ -36,9 +36,9 @@ module.exports = ({repo}, app) => {
     }).catch(next)
   })
 
-  repo.getAllMocks().then(mocks => {
+  repo.getAllEndpoints().then(mocks => {
     lodash.forEach(mocks, (api, key) => {
-      let selected = lodash.get(api, api.use)
+      let selected = lodash.get(api.responses, api.use)
 
       console.log(`${api.method} ${api.route}`)
 
