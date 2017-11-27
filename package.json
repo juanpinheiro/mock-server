@@ -42,6 +42,7 @@
     "http-status": "^0.2.5",
     "joi": "^13.0.2",
     "lodash": "^4.17.4",
+    "material-ui": "^1.0.0-beta.21",
     "mongodb": "^2.1.18",
     "morgan": "^1.7.0",
     "q": "^1.5.1",
