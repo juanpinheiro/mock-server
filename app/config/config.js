@@ -1,8 +1,4 @@
 const dbSettings = {
-  db: process.env.DB || 'mock',
-  user: process.env.DB_USER || 'root',
-  pass: process.env.DB_PASS || 'root',
-  repl: process.env.DB_REPLS || 'rs1',
   servers: (process.env.DB_SERVERS) ? process.env.DB_SERVERS.substr(1, process.env.DB_SERVERS.length - 2).split(' ') : [
     'localhost:27017'
   ],

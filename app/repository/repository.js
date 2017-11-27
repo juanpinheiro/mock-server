@@ -6,6 +6,23 @@ const repository = (container) => {
   const getAllMocks = () => {
     return new Promise((resolve, reject) => {
       const mocks = []
+      const cursor = db.collection('mock').find({}, {'_id': 1, 'method': 1, 'route': 1})
+      const addMock = (mock) => {
+        mocks.push(mock)
+      }
+      const sendMocks = (err) => {
+        if (err) {
+          reject(new Error('An error occured fetching all mocks, err:' + err))
+        }
+        resolve(mocks.slice())
+      }
+      cursor.forEach(addMock, sendMocks)
+    })
+  }
+
+  const getAllEndpoints = () => {
+    return new Promise((resolve, reject) => {
+      const mocks = []
       const cursor = db.collection('mock').find({})
       const addMock = (mock) => {
         mocks.push(mock)
@@ -72,6 +89,7 @@ const repository = (container) => {
     getAllMocks,
     getMockById,
     saveMock,
+    getAllEndpoints,
     deleteMockById,
     disconnect
   })
