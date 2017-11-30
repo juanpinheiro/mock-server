@@ -77,7 +77,7 @@ const repository = (container) => {
         route: mock.route
       })
       .then((count) => {
-        if (count === 0) {
+        if (count === 0 || mock.hasOwnProperty('_id')) {
           db.collection('mock').save(mock, { w: 1 }, (err, mock) => {
             if (err) {
               reject(new Error(`An error occured trying to save a mock`))
