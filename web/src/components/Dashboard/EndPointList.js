@@ -7,7 +7,7 @@ import ContentAdd from 'material-ui/svg-icons/content/add';
 import EndPoint from './EndPoint';
 
 const styles = {
-    addButtonContainer: {
+    addContainer: {
         display: 'flex',
         justifyContent: 'center',
         marginTop: 20,
@@ -28,13 +28,13 @@ class EndPointList extends Component {
                         <EndPoint
                             key={key}
                             endPoint={endPoint}
-                            onClick={() => this.props.getEndPointInfo(endPoint.id)}
+                            onClick={() => this.props.getEndPointInfo(endPoint._id)}
                         />
                     )}
                 </List>
-                <div style={ styles.addButtonContainer }>
-                    <FloatingActionButton mini={true} style={ styles.addButton }>
-                        <ContentAdd />
+                <div style={ styles.addContainer }>
+                    <FloatingActionButton mini={true}>
+                        <ContentAdd onClick={() => this.props.newEndPoint()}/>
                     </FloatingActionButton>
                 </div>
             </div>
@@ -49,6 +49,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
     getEndPoints: () => dispatch(actions.getEndPoints()),
     getEndPointInfo: id => dispatch(actions.getEndPointInfo(id)),
+    newEndPoint: () => dispatch(actions.newEndPoint()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(EndPointList);

@@ -1,49 +1,33 @@
 import React from 'react';
+import * as actions from 'actions';
 import { connect } from 'react-redux';
-import { TextField, FloatingActionButton } from 'material-ui';
-import ContentAdd from 'material-ui/svg-icons/content/add';
-import CodeList from './CodeList';
+import EndPointParams from './EndPointParams';
+import ResponseList from './ResponseList';
 
 const styles = {
     container: {
         padding: 20,
-    },
-    endPointName: {
-        width: '100%',
-    },
-    saveButtonContainer: {
-        width: '100%',
-        display: 'flex',
-        justifyContent: 'center',
-        marginTop: 20,
-    },
-    saveButton: {
-        width: 100,
-    },
-    addButtonContainer: {
-        display: 'flex',
-        justifyContent: 'center',
-        marginTop: 20,
     }
 };
 
-const EndPointInfo = ({ endPointInfo, route }) => (
+const EndPointInfo = (props) => (
     <div style={ styles.container }>
-        <TextField
-            name='mockName'
-            style={ styles.endPointName }
-            placeholder='Mock Name'
-            defaultValue={endPointInfo.route}
+        <EndPointParams
+            method={ props.endPointInfo.method }
+            route={ props.endPointInfo.route }
+            timeout={ props.endPointInfo.timeout }
+            onChangeMethod={ method => props.editMethod(method) }
+            onChangeRoute={ route => props.editRoute(route) }
+            onChangeTimeout={ timeout => props.editTimeout(timeout) }
         />
-        <CodeList
-            responses={ endPointInfo.responses || {} }
-            use={endPointInfo.use}
+        <ResponseList
+            responses={ props.endPointInfo.responses || [] }
+            use={ props.endPointInfo.use }
+            onAdd={() => props.addResponse()}
+            onChangeUse={use => props.editUse(use)}
+            onChangeResponseCode={(index, code) => props.editResponseCode(index, code)}
+            onChangeResponseData={(index, data) => props.editResponseData(index, data)}
         />
-        <div style={ styles.addButtonContainer }>
-            <FloatingActionButton mini={ true } style={ styles.addButton }>
-                <ContentAdd />
-            </FloatingActionButton>
-        </div>
     </div>
 );
 
@@ -51,4 +35,14 @@ const mapStateToProps = state => ({
     endPointInfo: state.endPointInfo,
 });
 
-export default connect(mapStateToProps)(EndPointInfo);
+const mapDispatchToProps = dispatch => ({
+    addResponse: () => dispatch(actions.addResponse()),
+    editResponseCode: (index, code) => dispatch(actions.editResponseCode(index, code)),
+    editResponseData: (index, data) => dispatch(actions.editResponseData(index, data)),
+    editUse: use => dispatch(actions.editUse(use)),
+    editMethod: method => dispatch(actions.editMethod(method)),
+    editRoute: route => dispatch(actions.editRoute(route)),
+    editTimeout: timeout => dispatch(actions.editTimeout(timeout)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(EndPointInfo);
