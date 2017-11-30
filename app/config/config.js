@@ -1,4 +1,5 @@
 const dbSettings = {
+  db: 'mock',
   servers: (process.env.DB_SERVERS) ? process.env.DB_SERVERS.substr(1, process.env.DB_SERVERS.length - 2).split(' ') : [
     'localhost:27017'
   ],

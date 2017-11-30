@@ -10,10 +10,13 @@ module.exports = ({repo}, app) => {
 
     validate(req.body, 'mock', res)
     .then(data => {
-      repo.saveMock(req.body, restartService)
-    })
-    .then((mock) => {
-      res.status(200).json({ 'msg': 'Mock data succesfully registered' })
+      repo.saveMock(req.body)
+      .then((mock) => {
+        res.status(200).json(mock)
+        restartService()
+      }).catch((mock) => {
+        res.status(422).json(mock)
+      })
     })
     .catch(next)
   })
