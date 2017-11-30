@@ -2,6 +2,7 @@ const express = require('express')
 const morgan = require('morgan')
 const helmet = require('helmet')
 const bodyparser = require('body-parser')
+const cors = require('cors')
 const apiMock = require('../api/mock')
 
 const start = (container) => {
@@ -20,14 +21,10 @@ const start = (container) => {
     app.use(morgan('dev'))
     app.use(bodyparser.json())
     app.use(helmet())
-    app.use((req, res, next) => {
-      res.header('Access-Control-Allow-Origin', '*')
-      res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization')
-      next()
-    })
+    app.use(cors())
     app.use((err, req, res, next) => {
       reject(new Error('Something went wrong!, err:' + err))
-      res.status(500).send('Something went wrong!')
+      res.status(500).send({'msg': 'Something went wrong!'})
       next()
     })
     app.use((req, res, next) => {
