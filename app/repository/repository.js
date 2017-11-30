@@ -65,19 +65,28 @@ const repository = (container) => {
     })
   }
 
-  const saveMock = (mock, restart) => {
+  const saveMock = (mock) => {
     if (mock.hasOwnProperty('_id')) {
       const ObjectID = container.resolve('ObjectID')
       mock._id = new ObjectID(mock._id)
     }
 
     return new Promise((resolve, reject) => {
-      db.collection('mock').save(mock, { w: 1 }, (err, mock) => {
-        if (err) {
-          reject(new Error(`An error occured trying to save a mock}`))
+      db.collection('mock').count({
+        method: mock.method,
+        route: mock.route
+      })
+      .then((count) => {
+        if (count === 0) {
+          db.collection('mock').save(mock, { w: 1 }, (err, mock) => {
+            if (err) {
+              reject(new Error(`An error occured trying to save a mock`))
+            }
+            resolve({ 'msg': 'Succesfully registered mock data' })
+          })
+        } else {
+          reject({ 'msg': 'Cannot save with a duplicated route' })
         }
-        restart()
-        resolve(mock)
       })
     })
   }

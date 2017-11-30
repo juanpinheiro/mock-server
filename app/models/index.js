@@ -23,6 +23,7 @@ const schemaValidator = (object, type, res) => {
       reject(new Error('schema type to validate not provided'))
     }
     const {error, value} = joi.validate(object, schemas[type], {
+      allowUnknown: true,
       abortEarly: false
     })
 

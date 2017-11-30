@@ -1,11 +1,11 @@
 'use strict'
 
 const mockSchema = (joi) => joi.object().keys({
-  method: joi.string().alphanum().regex(/^(GET|SET|PUT|DELETE)$/).required().options({
+  method: joi.string().alphanum().regex(/^(GET|POST|PUT|DELETE)$/).required().options({
     language: {
       string: {
         regex: {
-          base: 'allow only GET, SET, PUT and DELETE are allowed'
+          base: 'allow only GET, POST, PUT and DELETE are allowed'
         }
       }
     }
@@ -21,11 +21,11 @@ const mockSchema = (joi) => joi.object().keys({
   }),
   use: joi.number().required(),
   timeout: joi.number().required(),
-  responses: {
-    200: {
+  responses: joi.array().items(joi.object({
+    200: joi.object({
       data: joi.any().required()
-    }
-  }
-}).requiredKeys('responses', 'responses.200.data')
+    })
+  }))
+})
 
 module.exports = mockSchema
