@@ -4,7 +4,7 @@ const lodash = require('lodash')
 const pause = require('../helper/pause')
 
 module.exports = ({repo}, app) => {
-  app.post('/mock/save/', (req, res, next) => {
+  app.post('/mock/', (req, res, next) => {
     const {validate} = req.container.cradle
     const restartService = req.container.resolve('restartService')
 
@@ -27,7 +27,7 @@ module.exports = ({repo}, app) => {
     }).catch(next)
   })
 
-  app.get('/mock/delete/:id', (req, res, next) => {
+  app.delete('/mock/:id', (req, res, next) => {
     repo.deleteMockById(req.params.id).then(mocks => {
       res.status(200).json({ 'msg': `Mock id:${req.params.id} succesfully deleted` })
     }).catch(next)
@@ -41,7 +41,7 @@ module.exports = ({repo}, app) => {
 
   repo.getAllEndpoints().then(mocks => {
     lodash.forEach(mocks, (api, key) => {
-      let selected = lodash.get(api.responses, api.use)
+      let selected = lodash.find(api.responses, { code: api.use })
 
       console.log(`${api.method} ${api.route}`)
 

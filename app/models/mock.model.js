@@ -21,10 +21,9 @@ const mockSchema = (joi) => joi.object().keys({
   }),
   use: joi.number().required(),
   timeout: joi.number().required(),
-  responses: joi.array().items(joi.object({
-    200: joi.object({
-      data: joi.any().required()
-    })
+  responses: joi.array().items(joi.object().keys({
+    code: joi.number().required(),
+    data: joi.any().required()
   }))
 })
 
