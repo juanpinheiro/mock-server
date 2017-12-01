@@ -52,7 +52,7 @@ const EndPointParams = ({ method, route, timeout, onChangeMethod, onChangeRoute,
             <TextField
                 fullWidth={ true }
                 name='inputRoute'
-                placeholder='Mock Name'
+                placeholder='New Mock Name'
                 value={ route }
                 onChange={ event => onChangeRoute(event.target.value) }
             />

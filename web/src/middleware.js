@@ -1,5 +1,5 @@
 import * as actions from './actions';
-import { get, post } from './agent';
+import { get, post, del } from './agent';
 
 const middleware = store => next => action => {
 
@@ -27,22 +27,26 @@ const middleware = store => next => action => {
             );
             break;
         case 'POST_END_POINT':
-            // FIXME
-            const responses = store.getState().endPointInfo.responses.reduce((prev, cur) => {
-                prev[cur.code] = {data: cur.data || {}};
-                return prev;
-            }, {});
+            const data = store.getState().endPointInfo;
 
-            const data = {
-                ...store.getState().endPointInfo,
-                responses,
-            };
-
-            console.log(data);
-
-            post('/mock/save', data).then(
+            post('/mock', data).then(
                 res => {
-                    next(actions.getEndPoints());
+                    next(actions.addEndPoint(
+                        {
+                            ...data,
+                            _id: res.data._id,
+                        }
+                    ));
+                },
+                err => {
+                    console.log(err);
+                }
+            );
+            break;
+        case 'DELETE_END_POINT':
+            del('/mock/' + action.id).then(
+                res => {
+                    next(actions.removeEndPointFromList(action.id));
                 },
                 err => {
                     console.log(err);

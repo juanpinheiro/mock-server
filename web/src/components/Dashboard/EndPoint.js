@@ -1,14 +1,27 @@
 import React from 'react';
-import { ListItem, Avatar } from 'material-ui';
-import ActionDelete from 'material-ui/svg-icons/action/delete';
+import { ListItem, Avatar, IconMenu, MenuItem, IconButton } from 'material-ui';
+import { grey400 } from 'material-ui/styles/colors';
+import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import FileFolder from 'material-ui/svg-icons/file/folder';
 
-const EndPoint = ({ endPoint, onClick }) => (
+const iconButtonElement = (
+    <IconButton
+        touch={true}
+    >
+        <MoreVertIcon color={ grey400 } />
+    </IconButton>
+);
+
+const EndPoint = ({ endPoint, onClick, onDelete }) => (
     <ListItem
-        leftAvatar={<Avatar icon={<FileFolder />} />}
-        rightIcon={<ActionDelete />}
-        primaryText={endPoint.route}
-        onClick={onClick}
+        leftAvatar={<Avatar icon={ <FileFolder /> } />}
+        rightIconButton={
+            <IconMenu iconButtonElement={ iconButtonElement }>
+                <MenuItem onClick={ onDelete }>Delete</MenuItem>
+            </IconMenu>
+        }
+        primaryText={ endPoint.route }
+        onClick={ onClick }
     />
 );
 

@@ -3,7 +3,7 @@ import { api } from './constants';
 
 export const get = url => axios(
 	{
-		method: 'get',
+		method: 'GET',
 		url: api + url,
 		headers: {
 			'Content-Type' : 'application/json',
@@ -13,11 +13,21 @@ export const get = url => axios(
 
 export const post = (url, data) => axios(
 	{
-		method: 'post',
+		method: 'POST',
 		url: api + url,
 		headers: {
 			'Content-Type' : 'application/json',
 		},
 		data,
+	}
+);
+
+export const del = (url) => axios(
+	{
+		method: 'DELETE',
+		url: api + url,
+		headers: {
+			'Content-Type' : 'application/json',
+		},
 	}
 );

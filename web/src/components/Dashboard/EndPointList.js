@@ -26,15 +26,16 @@ class EndPointList extends Component {
                     <Subheader inset={ true }>Mock List</Subheader>
                     {this.props.endPoints.map((endPoint, key) =>
                         <EndPoint
-                            key={key}
-                            endPoint={endPoint}
-                            onClick={() => this.props.getEndPointInfo(endPoint._id)}
+                            key={ key }
+                            endPoint={ endPoint }
+                            onClick={ () => this.props.getEndPointInfo(endPoint._id) }
+                            onDelete={ () => this.props.deleteEndPoint(endPoint._id) }
                         />
                     )}
                 </List>
                 <div style={ styles.addContainer }>
-                    <FloatingActionButton mini={true}>
-                        <ContentAdd onClick={() => this.props.newEndPoint()}/>
+                    <FloatingActionButton mini={ true } onClick={ () => this.props.newEndPoint() }>
+                        <ContentAdd/>
                     </FloatingActionButton>
                 </div>
             </div>
@@ -50,6 +51,7 @@ const mapDispatchToProps = dispatch => ({
     getEndPoints: () => dispatch(actions.getEndPoints()),
     getEndPointInfo: id => dispatch(actions.getEndPointInfo(id)),
     newEndPoint: () => dispatch(actions.newEndPoint()),
+    deleteEndPoint: id => dispatch(actions.deleteEndPoint(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(EndPointList);

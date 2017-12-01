@@ -8,22 +8,7 @@ const initialState = {
 const endPointInfo = (state = initialState, action) => {
     switch (action.type) {
         case 'RECEIVE_END_POINT_INFO':
-            // FIXME
-
-            let oldResponses = action.endPointInfo.responses;
-            let newReponses = [];
-
-            for(let key in oldResponses) {
-                newReponses.push({
-                    code: key,
-                    ...oldResponses[key],
-                });
-            }
-
-            return {
-                ...action.endPointInfo,
-                responses: newReponses,
-            };
+            return {...action.endPointInfo};
         case 'RECEIVE_END_POINT_INFO_ERROR':
             return {};
         case 'ADD_RESPONSE':
@@ -31,13 +16,13 @@ const endPointInfo = (state = initialState, action) => {
                 ...state,
                 responses: [
                     ...state.responses,
-                    {},
+                    {data: {}},
                 ],
             };
         case 'EDIT_RESPONSE_CODE': {
             let responses = [...state.responses];
 
-            responses[action.index].code = action.code;
+            responses[action.index].code = Number(action.code);
 
             return {
                 ...state,
@@ -81,6 +66,11 @@ const endPointInfo = (state = initialState, action) => {
             };
         case 'NEW_END_POINT':
             return {...initialState};
+        case 'ADD_END_POINT':
+            return {
+                ...state,
+                _id: action.endPoint._id,
+            };
         default:
             return state;
     }

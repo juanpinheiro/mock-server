@@ -26,8 +26,8 @@ const ResponseList = ({ responses, use, onAdd, onChangeUse, onChangeResponseCode
             />
         )}
         <div style={ styles.addContainer }>
-            <FloatingActionButton mini={ true }>
-                <ContentAdd onClick={ onAdd } />
+            <FloatingActionButton mini={ true } onClick={ onAdd }>
+                <ContentAdd />
             </FloatingActionButton>
         </div>
     </div>

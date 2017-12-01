@@ -1,1 +1,1 @@
-export const api = '//nutror-mock-server.herokuapp.com';
+export const api = 'https://nutror-mock-server.herokuapp.com';

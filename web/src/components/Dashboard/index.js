@@ -2,6 +2,7 @@ import React from 'react';
 import Header from './Header';
 import EndPointList from './EndPointList';
 import EndPointInfo from './EndPointInfo';
+import Loading from './Loading';
 
 const styles = {
     container: {
@@ -18,6 +19,7 @@ const styles = {
 
 const Dashboard = () => (
     <div style={ styles.container }>
+        <Loading />
         <div style={ styles.sideList }>
             <EndPointList />
         </div>

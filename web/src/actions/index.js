@@ -71,3 +71,18 @@ export const postEndPoint = endPoint => ({
 export const newEndPoint = endPoint => ({
     type: 'NEW_END_POINT',
 });
+
+export const addEndPoint = endPoint => ({
+    type: 'ADD_END_POINT',
+    endPoint,
+});
+
+export const deleteEndPoint = id => ({
+    type: 'DELETE_END_POINT',
+    id,
+});
+
+export const removeEndPointFromList = id => ({
+    type: 'REMOVE_END_POINT_FROM_LIST',
+    id,
+});

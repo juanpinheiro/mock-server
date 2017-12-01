@@ -36,7 +36,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    addResponse: () => dispatch(actions.addResponse()),
+    addResponse: (id) => dispatch(actions.addResponse(id)),
     editResponseCode: (index, code) => dispatch(actions.editResponseCode(index, code)),
     editResponseData: (index, data) => dispatch(actions.editResponseData(index, data)),
     editUse: use => dispatch(actions.editUse(use)),

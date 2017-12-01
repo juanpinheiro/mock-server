@@ -1,0 +1,32 @@
+.loading{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    position:fixed;
+    pointer-events:none;
+    background-color:rgba(201, 201, 201, 0.5);
+    z-index: 999999;
+}
+@keyframes pana {
+    0% {
+        transform: rotate(0);
+    }
+    33% {
+        transform: rotate(-40deg);
+    }
+    66% {
+        transform: rotate(380deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.pana{
+    filter: grayscale(100%);
+    animation: pana 2s ease-in-out infinite;
+    transform: rotate(40deg);
+    width: 100px;
+}
