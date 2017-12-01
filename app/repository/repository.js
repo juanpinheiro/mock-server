@@ -82,7 +82,11 @@ const repository = (container) => {
             if (err) {
               reject(new Error(`An error occured trying to save a mock`))
             }
-            resolve({ 'msg': 'Succesfully registered mock data' })
+            resolve({
+              _id: mock.ops[0]._id,
+              method: mock.ops[0].method,
+              route: mock.ops[0].route
+            })
           })
         } else {
           reject({ 'msg': 'Cannot save with a duplicated route' })
