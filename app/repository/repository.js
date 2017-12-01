@@ -1,5 +1,7 @@
 'use strict'
 
+const lodash = require('lodash')
+
 const repository = (container) => {
   const {database: db} = container.cradle
 
@@ -66,6 +68,8 @@ const repository = (container) => {
   }
 
   const saveMock = (mock) => {
+    const _id = mock._id || null
+
     if (mock.hasOwnProperty('_id')) {
       const ObjectID = container.resolve('ObjectID')
       mock._id = new ObjectID(mock._id)
@@ -82,11 +86,7 @@ const repository = (container) => {
             if (err) {
               reject(new Error(`An error occured trying to save a mock`))
             }
-            resolve({
-              _id: mock.ops[0]._id,
-              method: mock.ops[0].method,
-              route: mock.ops[0].route
-            })
+            resolve({ _id: !lodash.isEmpty(_id) ? _id : mock.ops[0]._id })
           })
         } else {
           reject({ 'msg': 'Cannot save with a duplicated route' })
