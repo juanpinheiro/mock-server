@@ -1,73 +1,76 @@
 # MOCK SERVER
 
-This project generate a RESTFUL MOCK SERVER using one JSON file to configure the output:
+You can create a fake Restfull API of your mocks to improve your front-end development using only JSON.
 
- * Starting setting up the project
+It's just a Node.js app using [Express](http://expressjs.com/).
+
+This application fully supports the [Node on Heroku](https://devcenter.heroku.com/articles/getting-started-with-nodejs) article.
+
+[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+
+## Running Locally
+
+You must have the following applications installed:
+- [Node.js](https://nodejs.org/en/download/).
+- [MongoDB](https://docs.mongodb.com/manual/installation/).
+
+
+```sh
+$ git clone https://github.com/juanpinheiro/mock-server.git # or clone your own fork
+$ cd mock-server
+$ npm install
+$ npm start
 ```
-	npm install 
-	npm install gulp-cli -g
+
+Your app should now be running on [localhost:3000](http://localhost:3000/).
+
+## Deploying to Heroku
+
+We gonna use  [Node on Heroku](https://devcenter.heroku.com/articles/getting-started-with-nodejs) and  [mLab](https://devcenter.heroku.com/articles/mongolab#connecting-to-existing-mlab-deployments-from-heroku).
+You must have [Heroku CLI](https://cli.heroku.com/) installed.
+
+```sh
+$ heroku create # or heroku create project-name
+$ heroku addons:create mongolab
+$ git push heroku master
+$ heroku open
 ```
 
-* Create a new mock file `touch mock/hello-world.json`
+## How to use MOCK SERVER
 
-```javascript
-{
-  "method": "GET",
-  "route": "/helloworld",
-  "use": 200,
-  "timeout": 200,
-  "200": {
-    "data": {
-      "id": 1,
-      "title": "Hello World",
-    }
-  },
-  "500": {
-    "data": {
-      "message": "500 - Internal Server Error!"
-    }
+### Using Front-end Web Application
+You can use the [Front-end Web Application](https://github.com/daniloluca/mock-server-front) to manage your mock.
+
+### Using the API
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/1843c0fd38a20118a588)
+
+- Header `ContentType: application/json`
+
+- POST `/mock`, save and update passing "_id" field.
+  ```javascript
+      {
+      "method": "GET",
+      "route": "/hello",
+      "use": 200,
+      "timeout": 200,
+      "responses":[
+          {
+              "code": 200,
+              "data": {
+                  "msg": "test123"
+              }
+          },
+          {
+              "code": 500,
+              "data": {
+                  "msg": "fodeu"
+              }
+          }
+      ]
   }
-}
-```
+  ```
+- GET `/mocks`, return all mocks
+- GET `/mock/:id`, ruturn a single mock by ID
+- DELETE `/mock/:id`, delete a mock by ID
 
-* Run your server using the command `gulp serve`
-
-* Then just access your endpoint `http://localhost:3000/helloworld`
-
-### JSON Configuration:
-
-* Base configuration
-
-| JSON Data        | Options           | Description  |
-| ------------- |:-------------:| -----:|
-| method | `GET, POST, PUT, DELETE` | HTTP Request Method |
-| route      | `your/route/:id`      |  Endpoint `localhot:3000/your/route/1` |
-| use | `200, 500, 503, ...` | Any HTTP Status Code, related to the response data  |
-| timeout | `milliseconds` | Custom response time |
-
-* You can set one response for each HTTP Status Code.Implement the following response:
-
-
-```javascript
-...  
-"200": {
-    "data": {
-      "id": 1,
-      "title": "Hello World"
-    }
-},
-"500": {
-    "data": {
-      "message": "500 - Internal Server Error"
-    }
-}
-...
-```
-
-
-
-### Stuff used to make this:
-
- * [GulpJS](https://gulpjs.com/) to automate and enchance the workflow
- * [Express](http://expressjs.com/pt-br/) used to implment our RESTful API
- * [NodeJS](https://nodejs.org/en/) cause it's cool! :)
+### Have fun!
