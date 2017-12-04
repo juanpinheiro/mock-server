@@ -57,13 +57,13 @@ You can use the [Front-end Web Application](https://github.com/daniloluca/mock-s
           {
               "code": 200,
               "data": {
-                  "msg": "test123"
+                  "msg": "Success!"
               }
           },
           {
               "code": 500,
               "data": {
-                  "msg": "fodeu"
+                  "msg": "Internal Server Error"
               }
           }
       ]
