@@ -19,7 +19,7 @@
   "scripts": {
     "test": "mocha -R spec app/**/*.spec.js",
     "start": "./node_modules/.bin/forever app/index.js",
-    "postinstall": "NODE_PATH=web/src/ react-scripts build && cp -r web/src/build/. public_html && rm -R web/src/build && echo React build completed",
+    "postinstall": "NODE_PATH=web/src/ react-scripts build",
     "lint": "standard --verbose | snazzy",
     "node-debug": "DEBUG=express* node app/index.js",
     "chrome-debug": "node --debug-brk --inspect app/index.js",
