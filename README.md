@@ -8,22 +8,6 @@ This application fully supports the [Node on Heroku](https://devcenter.heroku.co
 
 [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
-## Running Locally
-
-You must have the following applications installed:
-- [Node.js](https://nodejs.org/en/download/).
-- [MongoDB](https://docs.mongodb.com/manual/installation/).
-
-
-```sh
-$ git clone https://github.com/juanpinheiro/mock-server.git # or clone your own fork
-$ cd mock-server
-$ npm install
-$ npm start
-```
-
-Your app should now be running on [localhost:3000](http://localhost:3000/).
-
 ## Deploying to Heroku
 
 We gonna use  [Node on Heroku](https://devcenter.heroku.com/articles/getting-started-with-nodejs) and  [mLab](https://devcenter.heroku.com/articles/mongolab#connecting-to-existing-mlab-deployments-from-heroku).
@@ -40,6 +24,8 @@ $ heroku open
 
 ### Using Front-end Web Application
 You can use the [Front-end Web Application](https://github.com/daniloluca/mock-server-front) to manage your mock.
+
+![Mock Server Front](https://image.ibb.co/eYotkG/mockserver.jpg)
 
 ### Using the API
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/1843c0fd38a20118a588)
@@ -72,5 +58,21 @@ You can use the [Front-end Web Application](https://github.com/daniloluca/mock-s
 - GET `/mocks`, return all mocks
 - GET `/mock/:id`, ruturn a single mock by ID
 - DELETE `/mock/:id`, delete a mock by ID
+
+### Running Locally
+
+You must have the following applications installed:
+- [Node.js](https://nodejs.org/en/download/).
+- [MongoDB](https://docs.mongodb.com/manual/installation/).
+
+
+```sh
+$ git clone https://github.com/juanpinheiro/mock-server.git # or clone your own fork
+$ cd mock-server
+$ npm install
+$ npm start
+```
+
+Your app should now be running on [localhost:3000](http://localhost:3000/).
 
 ### Have fun!
